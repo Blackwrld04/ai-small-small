@@ -22,6 +22,19 @@
    - [Dashboards](#dashboards)
 8. [User Roles & Account Model](#8-user-roles--account-model)
 9. [Curriculum Model](#9-curriculum-model)
+   - [How It Is Structured](#how-it-is-structured)
+   - [Track A — AI Literacy Curriculum](#track-a--ai-literacy-curriculum)
+     - [Level 1: Beginner — AI Explorers](#level-1-beginner--ai-explorers)
+     - [Level 2: Intermediate — AI Builders](#level-2-intermediate--ai-builders)
+     - [Level 3: Advanced — AI Thinkers & Creators](#level-3-advanced--ai-thinkers--creators)
+     - [Level 4: Expert — AI Innovators](#level-4-expert--ai-innovators)
+   - [Track B — Nigerian Curriculum + AI Integration](#track-b--nigerian-curriculum--ai-integration)
+     - [Band A (Ages 7–9)](#band-a-ages-79)
+     - [Band B (Ages 10–12)](#band-b-ages-1012)
+     - [Band C (Ages 13–15)](#band-c-ages-1315)
+     - [Band D (Ages 16–17) — WASSCE Track](#band-d-ages-1617--wassce-track)
+   - [Assessment Approach](#assessment-approach)
+   - [Open Items Before Building](#open-items-before-building)
 10. [AI Chat & Guardrails](#10-ai-chat--guardrails)
 11. [Design System](#11-design-system)
 12. [Security Notes](#12-security-notes)
@@ -507,31 +520,245 @@ Children (under 16) do not self-register. The parent creates the account on thei
 
 ## 9. Curriculum Model
 
-The curriculum has two parallel tracks served from [`backend/data/curriculum.js`](backend/data/curriculum.js):
+The full curriculum is served from [`backend/data/curriculum.js`](backend/data/curriculum.js) via the [`/api/curriculum`](#curriculum----apicurriculum) endpoints.
 
-### Track A — AI Literacy (by skill level)
+---
 
-Grouped by skill, not age. A first-timer of any age starts at Level 1.
+### How It Is Structured
 
-| Level | Name | Subtitle | Focus |
+Two parallel tracks, structured differently on purpose:
+
+- **Track A — AI Literacy:** organised by skill level, not age — Beginner, Intermediate, Advanced, Expert. AI knowledge does not track neatly with age: a 16-year-old who has never used a chatbot needs to start at Beginner, while a sharp 11-year-old who has been experimenting with AI tools at home might move into Intermediate quickly. Placement is based on a short entry check, not birth year.
+- **Track B — Curriculum + AI Integration:** organised by age band / school grade, since this track follows the actual Nigerian school curriculum, which is inherently grade-linked and cannot be decoupled from age the way AI literacy can.
+
+**Track B age bands (for curriculum mapping only — Track A does not use these):**
+
+| Band | Ages | Nigerian school equivalent |
+|---|---|---|
+| Band A | 7–9 | Primary 2–4 |
+| Band B | 10–12 | Primary 5–6 / JSS1 |
+| Band C | 13–15 | JSS2–SS1 |
+| Band D | 16–17 | SS2–SS3 (WASSCE-track) |
+
+**Placement into Track A levels:** a short placement check is run at enrolment (questions/tasks such as "have you used a chatbot before", "can you tell why an AI answer might be wrong", a simple prompting task) to place each child into Beginner, Intermediate, Advanced, or Expert — independent of their Track B age band. A child can be Beginner in Track A while sitting in the Band C curriculum group in Track B, and vice versa. The two tracks run on separate placement logic.
+
+Each AI Literacy module ends with a short assessment, which also functions as the check for moving up to the next level. Each term across both tracks feeds toward that term's Kid Innovator showcase, grouped by whichever cohort makes sense logistically.
+
+> **Note on Track B sources:** NERDC's Basic Education Curriculum (Primary 1–6, JSS1–3) covers Mathematics, English Studies, and Basic Science and Technology as core subjects. The 2025/2026 curriculum update formally added Basic Digital Literacy/IT as a practical skill strand. Band D (ages 16–17) sits outside the 9-Year BECE and instead follows the Senior Secondary curriculum leading to WASSCE, administered by WAEC — English Language and Mathematics are compulsory for essentially all candidates, alongside Civic Education and stream-specific electives. Treat the subject topics below as representative scope — cross-check with the current scheme of work for the specific classes/schools you onboard, since exact term-by-term topic order can vary slightly by state and by school.
+
+---
+
+### Track A — AI Literacy Curriculum
+
+#### Level 1: Beginner — "AI Explorers"
+
+Entry point for anyone new to AI, regardless of age — from a first-time 8-year-old to a first-time 17-year-old. Facilitators should adapt delivery format to the actual age in the room (more verbal/drawn responses for younger beginners, more written responses for older ones) while keeping the content itself at true beginner level.
+
+**Term 1: Meeting AI**
+
+| # | Module | Activity | Assessment |
 |---|---|---|---|
-| 1 | Beginner | AI Explorers | What AI is, safety, basic interactions |
-| 2 | Intermediate | AI Builders | How AI works, prompting, bias awareness |
-| 3 | Advanced | AI Thinkers & Creators | ML basics, generative AI, ethics |
-| 4 | Expert | AI Innovators | Exam prep, research, career/university AI use |
+| 1 | What Is AI? | Sort a list of "helpers" into AI / not AI | 5-question picture quiz |
+| 2 | Talking to AI Nicely | Give the AI three different instructions for drawing a picture and compare results | Write one clear instruction for a picture task |
+| 3 | AI Can Get Things Wrong | Find the mistake in an AI-generated example | Spot-the-mistake worksheet |
+| 4 | My AI Safety Rules | Role-play "would you tell it this or not?" with example prompts | Verbal or drawn response to 3 safety scenarios |
 
-Each level contains terms, and each term contains modules with an associated assessment.
+**Term 2: Playing and Creating with AI**
 
-### Track B — Nigerian Curriculum (by age band)
-
-Age-banded to mirror the Nigerian school system. A child's band is set automatically at account creation based on their age.
-
-| Band | Ages | School equivalent | Core subjects |
+| # | Module | Activity | Assessment |
 |---|---|---|---|
-| A | 7–9 | Primary 2–4 | Maths, English, Basic Science |
-| B | 10–12 | Primary 5–6 / JSS1 | + Basic Digital Literacy |
-| C | 13–15 | JSS2–SS1 | + Computer Studies |
-| D | 16–17 | SS1–SS3 (WASSCE) | + Civic Education |
+| 1 | Asking Better Questions | Improve a vague prompt three times | Prompt-improvement worksheet |
+| 2 | Spot the Robot Picture | Sort real vs. AI images | 8-image sorting quiz |
+| 3 | Building My First Chatbot | Guided build of a simple bot (e.g. a "riddle bot") using a no-code tool | Complete and demo the bot |
+| 4 | AI All Around Me | Home/school "AI scavenger hunt" list | Completed scavenger hunt sheet with 5 examples |
+
+**Term 3: Thinking Like a Detective**
+
+| # | Module | Activity | Assessment |
+|---|---|---|---|
+| 1 | Is This Real? | "Real or fake" card game | 6-item real/fake sort |
+| 2 | AI Helps Me Learn, It Doesn't Do It For Me | Discuss two example scenarios, decide which is okay | Scenario judgment worksheet (3 scenarios) |
+| 3 | My Kid Innovator Idea | Idea worksheet with a drawing | Completed idea worksheet |
+| 4 | Showcase Prep | Practice explaining the idea out loud in 3 sentences | Kid Innovator mini-pitch (1–2 minutes, supported) |
+
+---
+
+#### Level 2: Intermediate — "AI Builders"
+
+For learners who have completed Beginner, or who place in here directly at enrolment (e.g. an older child with some prior AI exposure).
+
+**Term 1: Understanding AI**
+
+| # | Module | Activity | Assessment |
+|---|---|---|---|
+| 1 | How AI Actually Works | Simple pattern-guessing game to illustrate "learning from examples" | Short written explanation in their own words |
+| 2 | The AI Tools I Already Use | Personal "AI tools I use" inventory | Categorisation quiz |
+| 3 | The Art of Prompting | Take one weak prompt through three rounds of improvement | Graded prompt-writing exercise (clarity, structure) |
+| 4 | Why AI Isn't Always Fair | Guided discussion + example | Short reflection response |
+
+**Term 2: Spotting Fakes and Staying Safe**
+
+| # | Module | Activity | Assessment |
+|---|---|---|---|
+| 1 | Deepfakes and Fake Images | Analyse a set of real vs. AI images | 10-item real/fake test with reasoning |
+| 2 | Fake Voice Notes and Scam Calls | Listen to example scenarios and identify red flags | Red-flag checklist applied to 3 scenarios |
+| 3 | Fake News and WhatsApp Forwards | Fact-check a set of sample forwards using lateral reading | Fact-check worksheet |
+| 4 | My Digital Footprint | "Share or don't share" sorting exercise | Privacy-scenario quiz |
+
+**Term 3: Building With AI**
+
+| # | Module | Activity | Assessment |
+|---|---|---|---|
+| 1 | No-Code Tool Basics | Build a simple app/game/chatbot using a no-code platform | Working build, demoed to the group |
+| 2 | Study Partner, Not Shortcut | Sort 10 homework scenarios into "good use" / "bad use" | Scored sorting exercise |
+| 3 | Designing My Kid Innovator Project | Pick a real problem and sketch an AI-assisted solution | Project plan worksheet |
+| 4 | Pitching My Idea | Structure a short pitch: problem, idea, how AI helps | Kid Innovator pitch (2–3 minutes) |
+
+---
+
+#### Level 3: Advanced — "AI Thinkers & Creators"
+
+For learners who have completed Intermediate, or who place in directly — e.g. an older teen with solid existing AI/tech familiarity.
+
+**Term 1: How AI Really Works**
+
+| # | Module | Activity | Assessment |
+|---|---|---|---|
+| 1 | Machine Learning Basics | — | Short written explanation with an example |
+| 2 | Generative AI Explained | Catch a hallucinated fact in a sample AI response | Hallucination-detection exercise |
+| 3 | Advanced Prompting Techniques | Solve the same task with a weak prompt vs. a strong one, compare results | Graded multi-part prompting task |
+| 4 | The Ethics of AI | Structured debate on one AI ethics question | Short position writeup with reasoning |
+
+**Term 2: Critical Thinking in an AI World**
+
+| # | Module | Activity | Assessment |
+|---|---|---|---|
+| 1 | Deepfakes, Voice Cloning and Digital Deception | — | Case-study analysis |
+| 2 | Verifying Information Like a Fact-Checker | Verify 3 real or realistic claims | Fact-checking report |
+| 3 | AI and Academic Integrity | Guided discussion of grey-area scenarios | Scenario-based written response |
+| 4 | Data Privacy and AI Tools | Privacy-checklist exercise applied to a real app | Privacy-checklist submission |
+
+**Term 3: Becoming an AI Creator**
+
+| # | Module | Activity | Assessment |
+|---|---|---|---|
+| 1 | Building Real Projects With No-Code AI Tools | Build a functioning chatbot, simple automation, or small app | Working project, demoed |
+| 2 | Finding a Real Problem | Light design-thinking: identify a genuine problem worth solving (school, home, community) | Problem-definition writeup |
+| 3 | Developing the Kid Innovator Pitch | Build a case: problem, solution, how AI is used, why it matters | Pitch deck or structured writeup |
+| 4 | Kid Innovator Showcase | Full pitch delivery | Final showcase presentation (5 minutes, Q&A) |
+
+---
+
+#### Level 4: Expert — "AI Innovators"
+
+The exam-prep and capstone-focused level. Most relevant to older students on the WASSCE track, but placed here by demonstrated skill, not age — a strong 14-year-old could reach this level too.
+
+**Term 1: Advanced AI Fluency**
+
+| # | Module | Activity | Assessment |
+|---|---|---|---|
+| 1 | AI Across Every Subject | Apply AI to a real study task across subjects | Short applied project |
+| 2 | Advanced Prompting for Research and Exam Prep | Generate targeted practice questions; self-check work without copying | Graded multi-step prompting exercise tied to a real subject |
+| 3 | AI for Career and University Prep | Brainstorm for CVs/personal statements (never write them wholesale); research courses | Brainstorm-to-draft exercise reviewed for originality |
+| 4 | AI Ethics and Global Debates | Structured, opinion-forming discussion on AI's impact | Written position piece with reasoning |
+
+**Term 2: Critical Digital Citizenship**
+
+| # | Module | Activity | Assessment |
+|---|---|---|---|
+| 1 | Deepfakes, Disinformation and Elections | — | Analysis of a real or realistic disinformation case |
+| 2 | Academic Integrity at the WASSCE Level | — | Scenario-judgment test with justification required |
+| 3 | AI and the Future of Work | — | Short reflective writeup |
+| 4 | Data Privacy, Security and Digital Rights | Applied security/privacy checklist | Applied checklist submission |
+
+**Term 3: AI Innovator Capstone**
+
+> **Note for SS3 candidates:** Term 3 falls in the WASSCE exam window — shift this term's activities to lighter, revision-focused sessions for that cohort rather than new capstone work.
+
+| # | Module | Activity | Assessment |
+|---|---|---|---|
+| 1 | Advanced No-Code/Low-Code Building | Build a functioning app, automation, or small tool solving a real problem | Working build, demoed |
+| 2 | Entrepreneurship and AI | Define a real problem and a clear value proposition | Written business/value-proposition case |
+| 3 | Capstone Project Development | Full build-out of the chosen idea | Project milestones checklist |
+| 4 | Capstone Showcase | Polished pitch, suitable as a portfolio piece for university or job applications | Final showcase with judges and Q&A |
+
+---
+
+### Track B — Nigerian Curriculum + AI Integration
+
+> **Principle for all bands:** AI is the study partner sitting next to the curriculum, not a replacement for it. For every subject/topic, the AI's role is one or more of: explain it a different way, generate extra practice questions, check work and explain mistakes, or turn revision into a game. Kids are taught explicitly in Track A when this crosses from "helping me learn" into "doing it for me" — Track B is where they practise that judgment on real schoolwork.
+
+---
+
+#### Band A (Ages 7–9)
+
+| Term | Mathematics | English Studies | Basic Science & Technology | AI Integration Examples |
+|---|---|---|---|---|
+| 1 | Number recognition, addition/subtraction, shapes | Phonics, simple sentences, reading comprehension | Living and non-living things, my body, weather | AI reads a short story aloud and asks comprehension questions; AI generates extra addition practice at the child's level |
+| 2 | Multiplication basics, measurement, time | Vocabulary building, simple comprehension passages | Basic hygiene, simple machines, plants and animals, simple safety rules | AI turns spelling words into a quiz game; AI explains a science term using a picture-style description |
+| 3 | Fractions (basic), money/counting | Simple composition, storytelling | Basic hygiene, simple machines around us | AI helps brainstorm a short story's next sentence (without writing it for them); AI quizzes on term vocabulary before test week |
+
+---
+
+#### Band B (Ages 10–12)
+
+| Term | Mathematics | English Studies | Basic Science & Technology / Basic Digital Literacy | AI Integration Examples |
+|---|---|---|---|---|
+| 1 | Fractions, decimals, basic geometry | Grammar (tenses, parts of speech), comprehension | Matter and its properties, simple circuits, intro to computers | AI walks through a fraction problem step by step instead of giving the final answer; AI drills grammar with instant feedback |
+| 2 | Ratio, percentages, basic algebra intro | Essay structure, summary writing | Energy and forces, human body systems, basic coding concepts | AI reviews a draft essay and asks guiding questions rather than rewriting it; AI explains a science diagram in simpler terms |
+| 3 | Data handling, basic geometry (angles, shapes) | Comprehension, letter/composition writing | Environment and conservation, intro to typing/basic computer use | AI generates practice comprehension passages at reading level; AI-supported typing/keyboarding practice tied to Basic Digital Literacy strand |
+
+---
+
+#### Band C (Ages 13–15)
+
+| Term | Mathematics | English Studies | Basic Science & Technology / Computer Studies | AI Integration Examples |
+|---|---|---|---|---|
+| 1 | Algebra, linear equations, basic geometry proofs | Literature comprehension, formal writing | Basic physics concepts (motion, energy), intro to programming logic | AI works through algebra problems step by step and explains why, not just the answer; AI critiques essay structure/argument (not the wording) |
+| 2 | Statistics, probability | Argumentative essay writing, comprehension | Chemistry basics (elements, reactions), computer hardware/software basics | AI helps structure an argumentative essay outline; AI generates practice statistics questions with worked solutions |
+| 3 | Geometry, introductory trigonometry | Exam-style comprehension and composition practice | Basic biology (cells, systems), intro to web/app building basics | AI-generated past-question-style drills for exam prep (BECE-aligned); AI supports a small coding/web project tying into the Kid Innovator track |
+
+---
+
+#### Band D (Ages 16–17) — WASSCE Track
+
+> **Scope note:** This covers the compulsory core (English Language, Mathematics, Civic Education) that applies to nearly all candidates regardless of stream. Stream-specific electives (Science: Biology/Chemistry/Physics; Arts/Commercial electives) are a natural phase-two extension once the core is validated with a pilot cohort.
+
+| Term | Mathematics | English Language | Civic Education | AI Integration Examples |
+|---|---|---|---|---|
+| 1 | Algebra, functions, indices and logarithms | Comprehension, lexis and structure, essay writing | Citizenship, rights and responsibilities | AI walks through algebra/logarithm problems step by step, explaining reasoning not just the answer; AI critiques essay structure and argument before a student submits it |
+| 2 | Trigonometry, introductory statistics | Summary writing, oral English fundamentals | Democracy, rule of law, civic participation | AI-generated WASSCE-style past questions for targeted practice; AI-supported discussion prep for civic topics (debate framing, not opinions handed to the student) |
+| 3 | Mensuration, further statistics and probability | Full exam-style revision: comprehension, essay, objectives | Revision and current-affairs application | Timed past-question drilling with AI-generated variations; AI-built personalised revision plan based on identified weak areas. For SS3 — shift to pure revision, no new topics, given the WASSCE exam window. |
+
+---
+
+### Assessment Approach
+
+| Level | Type | Notes |
+|---|---|---|
+| **Module-level (Track A)** | Short, low-stakes | Quizzes, sorting exercises, short written/verbal responses, hands-on demos. For Band A, favour verbal/drawn responses over reading-heavy tests. |
+| **Subject-level (Track B)** | Continuous-assessment style | Short tests and class exercises. AI-generated extra practice is used for revision, not as the graded assessment itself, so results reflect the child's own understanding. |
+| **Term-level (both tracks)** | Kid Innovator milestone | An idea + drawing (Band A) → project + pitch (Band B) → full pitch with Q&A (Band C) → portfolio-ready capstone (Band D, rebrand as "Young Innovator" for 16–17 year olds). |
+
+> **Consistency check:** every module assessment should be answerable using only what was taught in that module. Avoid testing skills or vocabulary not yet introduced.
+
+---
+
+### Open Items Before Building
+
+1. **Track B topic ordering** — topics above are representative scope based on the NERDC 9-Year Basic Education Curriculum. Validate exact term-by-term ordering against the specific scheme of work once you onboard a pilot school, as it can vary slightly by state and school.
+
+2. **Open chat vs. structured interaction** — decide per band how much free-form prompting is allowed. Recommended approach:
+   - Band A: fully structured/guided AI interaction, no open chat
+   - Band B: scoped/guided chat within exercises
+   - Band C: more open prompting practice, given the explicit Track A focus on prompting skills
+   - Band D: full open prompting with academic integrity guardrails active
+
+3. **Kid Innovator showcase format** — should scale with band: idea + drawing (Band A) → project + short pitch (Band B) → full pitch with Q&A (Band C) → portfolio-ready capstone (Band D).
+
+4. **Band D stream electives gap** — Band D's Track B currently covers only the compulsory core. Science/Arts/Commercial stream electives are a real gap for a full WASSCE prep offering. Decide whether to add these before or after the first pilot, as they significantly expand build scope.
+
+5. **Band D audience scope** — Band D (16–17) sits outside the 7–15 range originally scoped for AI Small Small. Confirm this is an intentional widening of the target audience, and therefore of parent/school messaging, pricing tiers, and marketing — rather than just a content addition.
 
 ---
 
