@@ -18,10 +18,14 @@ app.use(cors({
     // Allow requests with no origin (curl, Postman, Railway health checks)
     if (!origin) return callback(null, true);
     if (allowedOrigins.includes(origin)) return callback(null, true);
-    callback(new Error(`CORS: origin ${origin} not allowed`));
+    // Return false (block) instead of throwing — throwing causes 500 on preflight
+    return callback(null, false);
   },
   credentials: true,
 }));
+
+// Explicitly handle preflight OPTIONS requests for all routes
+app.options('*', cors());
 app.use(express.json());
 
 app.get('/api/health', (req, res) => res.json({ ok: true }));
