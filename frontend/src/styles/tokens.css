@@ -1,0 +1,179 @@
+:root{
+  --indigo:#1E3554;
+  --indigo-deep:#152640;
+  --marigold:#F2A230;
+  --marigold-deep:#D98A1A;
+  --leaf:#3F8F5F;
+  --leaf-deep:#2F6E48;
+  --coral:#E8613D;
+  --paper:#FBF6EC;
+  --paper-dim:#F3EBDA;
+  --ink:#1B1B18;
+  --ink-soft:#4A473F;
+  --line: rgba(27,27,24,0.12);
+  --radius: 18px;
+  --max: 1280px;
+  --page-px: 32px;
+  --page-py: 52px;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0; padding: 0;
+  width: 100%; min-height: 100%;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Work Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* ── Typography ── */
+h1, h2, h3, h4 {
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 700;
+  margin: 0;
+  color: var(--indigo);
+}
+a { color: inherit; text-decoration: none; }
+
+.eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12.5px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--leaf-deep);
+  font-weight: 600;
+}
+
+/* ── Layout helpers ── */
+
+/* Full-bleed container - stretches to all available width, padded on both sides */
+.wrap {
+  width: 100%;
+  padding: 0 var(--page-px);
+}
+
+/* Narrower container for focus pages: auth forms, profile, settings, chat */
+.wrap-narrow {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 var(--page-px);
+}
+
+/* Standard inner page padding */
+.page {
+  width: 100%;
+  flex: 1;
+  padding: var(--page-py) var(--page-px);
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 24px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 15px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease;
+  font-family: 'Work Sans', sans-serif;
+  white-space: nowrap;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-primary {
+  background: var(--marigold);
+  color: var(--indigo-deep);
+  box-shadow: 0 4px 0 var(--marigold-deep);
+}
+.btn-primary:hover { box-shadow: 0 6px 0 var(--marigold-deep); }
+.btn-outline {
+  background: transparent;
+  color: var(--indigo);
+  border-color: var(--indigo);
+}
+.btn-outline:hover { background: var(--indigo); color: var(--paper); }
+
+/* ── Card ── */
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px 26px;
+}
+
+/* ── Forms ── */
+.input-group {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.input-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--indigo);
+}
+.input-group input,
+.input-group select,
+.input-group textarea {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--line);
+  font-family: 'Work Sans', sans-serif;
+  font-size: 15px;
+  background: #fff;
+  width: 100%;
+}
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+  outline: 2px solid var(--marigold);
+  border-color: var(--marigold);
+}
+.error-text { color: var(--coral); font-size: 14px; font-weight: 600; }
+
+/* ── Role picker cards ── */
+.role-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 20px;
+  cursor: pointer;
+  margin-bottom: 12px;
+  transition: border-color .15s ease, background .15s ease;
+}
+.role-card:hover { border-color: var(--marigold); }
+.role-card.selected { border-color: var(--indigo); background: var(--paper-dim); }
+.role-card h4 { font-size: 16px; margin-bottom: 4px; }
+.role-card p { font-size: 13.5px; color: var(--ink-soft); margin: 0; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  :root {
+    --page-px: 24px;
+    --page-py: 40px;
+  }
+  nav { padding-left: 24px !important; padding-right: 24px !important; }
+}
+@media (max-width: 600px) {
+  :root {
+    --page-px: 16px;
+    --page-py: 28px;
+  }
+}
