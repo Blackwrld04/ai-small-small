@@ -27,3 +27,6 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
+
+# Runtime database - never commit real user data
+backend/data/db.json
