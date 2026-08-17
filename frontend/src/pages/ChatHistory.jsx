@@ -27,14 +27,8 @@ export default function ChatHistory() {
     if (!selectedChild) return;
     setLoading(true);
     setError('');
-    fetch(`/api/chat/history/${selectedChild}`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem('nga_token')}` },
-    })
-      .then(res => res.json().then(data => ({ ok: res.ok, data })))
-      .then(({ ok, data }) => {
-        if (!ok) throw new Error(data.error || 'Could not load chat history.');
-        setLogs(data);
-      })
+    api.getChatHistory(selectedChild)
+      .then(data => setLogs(data))
       .catch(err => setError(err.message))
       .finally(() => setLoading(false));
   }, [selectedChild]);

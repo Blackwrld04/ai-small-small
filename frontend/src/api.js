@@ -26,4 +26,5 @@ export const api = {
   getTrackA: () => request('/curriculum/track-a'),
   getTrackB: () => request('/curriculum/track-b'),
   sendChat: (payload) => request('/chat', { method: 'POST', body: JSON.stringify(payload) }),
+  getChatHistory: (childId) => request(`/chat/history/${childId}`),
 };
