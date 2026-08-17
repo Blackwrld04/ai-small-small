@@ -2,7 +2,8 @@
 
 > AI literacy + Nigerian curriculum support for children aged 7–17. A full-stack React + Node.js platform designed to teach kids how to think critically about AI, not just use it.
 
-**[DOCUMENTATION.md](DOCUMENTATION.md)** contains the complete architecture, curriculum design, API reference, and roadmap. Start there for in-depth information.
+**Live:** [aismallsmall.netlify.app](https://aismallsmall.netlify.app)  
+**Full docs:** [DOCUMENTATION.md](DOCUMENTATION.md) — complete architecture, curriculum design, API reference, and roadmap.
 
 ---
 
@@ -75,6 +76,7 @@ The dev server automatically proxies `/api` calls to the backend.
 | **Auth** | JWT (jsonwebtoken), bcryptjs |
 | **Database** | JSON file (dev) — swap for Postgres in production |
 | **Styling** | Vanilla CSS + CSS custom properties |
+| **Hosting** | Netlify (frontend) |
 
 ---
 
@@ -247,4 +249,5 @@ Never commit `.env`. Use a secrets manager in production.
 
 ---
 
+**Live site:** [aismallsmall.netlify.app](https://aismallsmall.netlify.app)  
 **Questions?** See [DOCUMENTATION.md](DOCUMENTATION.md) or contact hello@aismallsmall.ng
