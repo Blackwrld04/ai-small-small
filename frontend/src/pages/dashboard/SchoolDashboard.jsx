@@ -87,7 +87,7 @@ export default function SchoolDashboard() {
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder="Search tools…"
-            style={{ padding: '9px 14px', borderRadius: 10, border: '1.5px solid var(--line)', fontSize: 14, width: 200, fontFamily: "'Work Sans', sans-serif" }}
+            style={{ padding: '9px 14px', borderRadius: 10, border: '1.5px solid var(--line)', fontSize: 14, width: '100%', maxWidth: 200, fontFamily: "'Work Sans', sans-serif" }}
           />
         </div>
 

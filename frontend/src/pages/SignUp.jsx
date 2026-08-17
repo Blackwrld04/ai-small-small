@@ -49,19 +49,10 @@ export default function SignUp() {
   const q = QUOTES[quoteIdx];
 
   return (
-    <div style={{ display: 'flex', minHeight: 'calc(100vh - 60px)', width: '100%' }}>
+    <div className="split-page">
 
       {/* ── Left panel - image ── */}
-      <div style={{
-        flex: '1 1 45%',
-        background: '#c9a87c',
-        position: 'relative',
-        overflow: 'hidden',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'flex-end',
-        minHeight: 500,
-      }}>
+      <div className="split-panel-image" style={{ background: '#c9a87c' }}>
         <img
           src="/images/sign2.jpg"
           alt="Learning with technology illustration"
@@ -102,15 +93,7 @@ export default function SignUp() {
       </div>
 
       {/* ── Right panel - form ── */}
-      <div style={{
-        flex: '1 1 55%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: 'var(--paper)',
-        padding: '48px 32px',
-        overflowY: 'auto',
-      }}>
+      <div className="split-panel-form">
         <div style={{ width: '100%', maxWidth: 460 }}>
           <h1 style={{ fontSize: 26, marginBottom: 6 }}>
             {step === 1 ? 'Create your account' : `Sign up as a ${ROLES.find(r => r.id === role)?.title.toLowerCase()}`}

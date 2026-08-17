@@ -35,19 +35,15 @@ export default function ChildLogin() {
   }
 
   return (
-    <div style={{ display: 'flex', minHeight: 'calc(100vh - 60px)', width: '100%' }}>
+    <div className="split-page">
 
       {/* ── Left panel - image + fun fact ── */}
-      <div style={{
-        flex: '1 1 50%',
+      <div className="split-panel-image" style={{
         background: '#f0ece3',
-        display: 'flex',
-        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '48px 40px',
-        gap: 24,
-        minHeight: 500,
+        padding: '32px 24px',
+        gap: 20,
       }}>
         {/* Brain-bulb card */}
         <div style={{
@@ -88,14 +84,7 @@ export default function ChildLogin() {
       </div>
 
       {/* ── Right panel - form ── */}
-      <div style={{
-        flex: '1 1 50%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: 'var(--paper)',
-        padding: '48px 32px',
-      }}>
+      <div className="split-panel-form">
         <div style={{ width: '100%', maxWidth: 380 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 24 }}>
             <div style={{

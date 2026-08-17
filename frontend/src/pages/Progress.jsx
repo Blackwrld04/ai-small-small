@@ -75,7 +75,7 @@ export default function Progress() {
       </div>
 
       {/* ── Stats strip ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 12, marginBottom: 32 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(130px,1fr))', gap: 12, marginBottom: 32 }}>
         {[
           { label: 'Modules done',   value: `${doneModules}/${MODULES.length}`, color: 'var(--leaf)' },
           { label: 'Badges earned',  value: `${earnedBadges.length}/${ALL_BADGES.length}`, color: 'var(--marigold-deep)' },

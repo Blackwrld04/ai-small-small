@@ -26,19 +26,10 @@ export default function Login() {
   }
 
   return (
-    <div style={{ display: 'flex', minHeight: 'calc(100vh - 60px)', width: '100%' }}>
+    <div className="split-page">
 
       {/* ── Left panel - image ── */}
-      <div style={{
-        flex: '1 1 50%',
-        background: 'var(--indigo)',
-        position: 'relative',
-        overflow: 'hidden',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'flex-end',
-        minHeight: 500,
-      }}>
+      <div className="split-panel-image" style={{ background: 'var(--indigo)' }}>
         <img
           src="/images/sign1.jpg"
           alt="Online learning illustration"
@@ -72,14 +63,7 @@ export default function Login() {
       </div>
 
       {/* ── Right panel - form ── */}
-      <div style={{
-        flex: '1 1 50%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: 'var(--paper)',
-        padding: '48px 32px',
-      }}>
+      <div className="split-panel-form">
         <div style={{ width: '100%', maxWidth: 400 }}>
           <h1 style={{ fontSize: 28, marginBottom: 6 }}>Welcome back</h1>
           <p style={{ color: 'var(--ink-soft)', marginBottom: 28, fontSize: 14.5 }}>
